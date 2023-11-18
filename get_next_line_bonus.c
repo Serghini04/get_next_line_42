@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 17:58:45 by meserghi          #+#    #+#             */
-/*   Updated: 2023/11/18 19:55:02 by meserghi         ###   ########.fr       */
+/*   Updated: 2023/11/18 19:52:45 by meserghi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-char	*ft_fill_res(int fd, char *res)
+char	*ft_get_line(int fd, char *res)
 {
 	char	*buff;
 	int		size;
@@ -83,7 +83,7 @@ char	*next_line(char *str)
 		free(str);
 		return (NULL);
 	}
-	res = malloc((ft_strlen(str + i) + 1) * sizeof(char));
+	res = malloc((ft_strlen(str) - i + 1) * sizeof(char));
 	if (!res)
 		return (free(str), NULL);
 	i++;
@@ -96,17 +96,17 @@ char	*next_line(char *str)
 
 char	*get_next_line(int fd)
 {
-	static char	*save_res;
+	static char	*save_res[256];
 	char		*res;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	save_res = ft_fill_res(fd, save_res);
-	if (!save_res)
+	save_res[fd] = ft_get_line(fd, save_res[fd]);
+	if (!save_res[fd])
 		return (NULL);
-	res = get_res(save_res);
+	res = get_res(save_res[fd]);
 	if (!res)
-		return (free(save_res), save_res = NULL, NULL);
-	save_res = next_line(save_res);
+		return (free(save_res[fd]), save_res[fd] = NULL, NULL);
+	save_res[fd] = next_line(save_res[fd]);
 	return (res);
 }
