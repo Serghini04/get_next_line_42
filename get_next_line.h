@@ -6,7 +6,7 @@
 /*   By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 17:58:50 by meserghi          #+#    #+#             */
-/*   Updated: 2023/11/17 13:16:08 by meserghi         ###   ########.fr       */
+/*   Updated: 2024/01/04 17:04:04 by meserghi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <fcntl.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define lBUFFER_SIZE 42
 # endif
 
 int		ft_check(char *str);

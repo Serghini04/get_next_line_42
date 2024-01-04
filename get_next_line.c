@@ -6,7 +6,7 @@
 /*   By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 17:58:45 by meserghi          #+#    #+#             */
-/*   Updated: 2023/11/18 19:55:02 by meserghi         ###   ########.fr       */
+/*   Updated: 2024/01/04 17:01:14 by meserghi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_fill_res(int fd, char *res)
 		res[0] = '\0';
 	}
 	size = 1;
-	buff = malloc(BUFFER_SIZE + 1);
+	buff = malloc((size_t)BUFFER_SIZE + 1);
 	if (!buff)
 		return (free(res), NULL);
 	while (size > 0 && !ft_check(res))
@@ -99,7 +99,7 @@ char	*get_next_line(int fd)
 	static char	*save_res;
 	char		*res;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > 2147483647)
 		return (NULL);
 	save_res = ft_fill_res(fd, save_res);
 	if (!save_res)
